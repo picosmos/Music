@@ -1,0 +1,15 @@
+﻿<UserControl x:Class="Koopakiller.Apps.MusicManager.View.SettingsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:viewModel="clr-namespace:Koopakiller.Apps.MusicManager.ViewModel"
+             mc:Ignorable="d" d:DataContext="{d:DesignInstance viewModel:SettingsViewModel}"
+             d:DesignHeight="300" d:DesignWidth="300">
+    <StackPanel>
+        <TextBlock Text="Music Path:" />
+        <TextBox Text="{Binding MusicPath, Mode=TwoWay}"/>
+        <TextBlock Text="Playlists Path:" />
+        <TextBox Text="{Binding PlaylistsPath, Mode=TwoWay}"/>
+    </StackPanel>
+</UserControl>

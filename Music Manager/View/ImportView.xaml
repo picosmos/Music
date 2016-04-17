@@ -1,0 +1,24 @@
+﻿<UserControl x:Class="Koopakiller.Apps.MusicManager.View.ImportView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:command="http://www.galasoft.ch/mvvmlight"
+             xmlns:viewModel="clr-namespace:Koopakiller.Apps.MusicManager.ViewModel"
+             mc:Ignorable="d" d:DataContext="{d:DesignInstance viewModel:ImportViewModel}"
+             d:DesignHeight="300" d:DesignWidth="300">
+    <Grid>
+        <Border AllowDrop="True" >
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="Drop">
+                    <command:EventToCommand  Command="{Binding DropCommand}" PassEventArgsToCommand="True"/>
+                </i:EventTrigger>
+                <i:EventTrigger EventName="DragOver">
+                    <command:EventToCommand  Command="{Binding DragOverCommand}" PassEventArgsToCommand="True"/>
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+            <TextBlock Text="Drop music files or click" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        </Border>
+    </Grid>
+</UserControl>
