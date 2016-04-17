@@ -83,6 +83,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Helper\PathBuilder.cs" />
     <Compile Include="UI\AutoTypeTemplateSelector.cs" />
     <Compile Include="ViewModel\HeaderViewModelBase.cs" />
     <Compile Include="ViewModel\ImportViewModel.cs" />

@@ -1,8 +1,11 @@
 ﻿using System;
 using System.IO;
 using System.Linq;
+using System.Text;
+using System.Text.RegularExpressions;
 using System.Windows;
 using GalaSoft.MvvmLight.Command;
+using Koopakiller.Apps.MusicManager.Helper;
 
 namespace Koopakiller.Apps.MusicManager.ViewModel
 {
@@ -61,7 +64,12 @@ namespace Koopakiller.Apps.MusicManager.ViewModel
 
         private void ProcessFile(string file)
         {
-            
+            var pb = new PathBuilder
+            {
+                Pattern = Properties.Settings.Default.ImportPathPattern,
+                RootPath= Properties.Settings.Default.MusicPath,
+            };
+            var p = pb.Build();
         }
     }
 }
