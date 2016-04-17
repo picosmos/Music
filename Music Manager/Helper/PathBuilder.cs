@@ -41,10 +41,10 @@ namespace Koopakiller.Apps.MusicManager.Helper
                 sb.Append(x);
             }
             sb.Append(this.Pattern.Substring(last));
-
+            
             return Path.Combine(this.RootPath, sb.ToString());
         }
-
+        
         public string Pattern
         {
             get { return this._pattern; }

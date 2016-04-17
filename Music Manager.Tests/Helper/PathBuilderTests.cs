@@ -132,5 +132,56 @@ namespace Koopakiller.Apps.MusicManager.Tests.Helper
             var pb = new PathBuilder(@"C:\Test", @"<NotExist>");
             var result = pb.Build();
         }
+
+        [TestMethod, ExpectedException(typeof(KeyNotFoundException))]
+        public void BuildTest_InvalidPatternBecauseCase()
+        {
+            var pb = new PathBuilder(@"C:\Test", @"<test>")
+            {
+                Replacements =
+                {
+                    ["Test"]="something",
+                },
+            };
+            pb.Build();
+        }
+
+        [TestMethod]
+        public void BuildTest_EmptyRootPath()
+        {
+            var pb = new PathBuilder("", @"PatternPath");
+            var result = pb.Build();
+            Assert.AreEqual("PatternPath", result);
+        }
+
+        [TestMethod]
+        public void BuildTest_InvalidRootPathCharacters()
+        {
+            var pb = new PathBuilder(@"C:\Test:", @"PatternPath");
+            var result = pb.Build();
+            Assert.AreEqual(@"C:\Test:PatternPath", result);
+        }
+
+        [TestMethod]
+        public void BuildTest_InvalidPatternCharacters()
+        {
+            var pb = new PathBuilder(@"C:\Test", @":");
+            var result = pb.Build();
+            Assert.AreEqual(@"C:\Test\:", result);
+        }
+
+        [TestMethod]
+        public void BuildTest_InvalidRootPath()
+        {
+            var pb = new PathBuilder(@"C:\Test", @"<Test>")
+            {
+                Replacements =
+                {
+                    ["Test"]=":",
+                },
+            };
+            var result = pb.Build();
+            Assert.AreEqual(@"C:\Test\:", result);
+        }
     }
 }
