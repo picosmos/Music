@@ -64,11 +64,7 @@ namespace Koopakiller.Apps.MusicManager.ViewModel
 
         private void ProcessFile(string file)
         {
-            var pb = new PathBuilder
-            {
-                Pattern = Properties.Settings.Default.ImportPathPattern,
-                RootPath= Properties.Settings.Default.MusicPath,
-            };
+            var pb = new PathBuilder(Properties.Settings.Default.MusicPath, Properties.Settings.Default.ImportPathPattern);
             var p = pb.Build();
         }
     }

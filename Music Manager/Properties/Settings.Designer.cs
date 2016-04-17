@@ -49,7 +49,7 @@ namespace Koopakiller.Apps.MusicManager.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("{Performers|AlbumArtists}\\{Title}.{Extension}")]
+        [global::System.Configuration.DefaultSettingValueAttribute("<Performers|AlbumArtists>\\<Title>.<Extension>")]
         public string ImportPathPattern {
             get {
                 return ((string)(this["ImportPathPattern"]));
