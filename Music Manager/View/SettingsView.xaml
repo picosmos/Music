@@ -11,5 +11,11 @@
         <TextBox Text="{Binding MusicPath, Mode=TwoWay}"/>
         <TextBlock Text="Playlists Path:" />
         <TextBox Text="{Binding PlaylistsPath, Mode=TwoWay}"/>
+        <TextBlock Text="Import Path Pattern:" />
+        <TextBox Text="{Binding ImportPathPattern, Mode=TwoWay}"/>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+            <Button Command="{Binding SaveCommand}" Content="Save"/>
+            <Button Command="{Binding ResetCommand}" Content="Reset"/>
+        </StackPanel>
     </StackPanel>
 </UserControl>

@@ -6,6 +6,7 @@ namespace Koopakiller.Apps.MusicManager.ViewModel
     {
         private string _musicPath;
         private string _playlistsPath;
+        private string _importPathPattern;
 
         public SettingsViewModel() : base("Settings")
         {
@@ -24,18 +25,21 @@ namespace Koopakiller.Apps.MusicManager.ViewModel
         }
 
         public bool IsSaved => this.MusicPath == Properties.Settings.Default.MusicPath
-                            && this.PlaylistsPath == Properties.Settings.Default.PlaylistsPath;
+                            && this.PlaylistsPath == Properties.Settings.Default.PlaylistsPath
+                            && this.ImportPathPattern == Properties.Settings.Default.ImportPathPattern;
 
         private void OnReset()
         {
             this.MusicPath = Properties.Settings.Default.MusicPath;
             this.PlaylistsPath = Properties.Settings.Default.PlaylistsPath;
+            this.ImportPathPattern = Properties.Settings.Default.ImportPathPattern;
         }
 
         private void OnSave()
         {
             Properties.Settings.Default.MusicPath = this.MusicPath;
             Properties.Settings.Default.PlaylistsPath = this.PlaylistsPath;
+            Properties.Settings.Default.ImportPathPattern = this.ImportPathPattern;
             Properties.Settings.Default.Save();
         }
 
@@ -57,6 +61,16 @@ namespace Koopakiller.Apps.MusicManager.ViewModel
             {
                 this._playlistsPath = value;
                 this.RaisePropertyChanged();
+                this.RaiseIsSavedChanged();
+            }
+        }
+
+        public string ImportPathPattern
+        {
+            get { return this._importPathPattern; }
+            set
+            {
+                this._importPathPattern = value;
                 this.RaiseIsSavedChanged();
             }
         }
