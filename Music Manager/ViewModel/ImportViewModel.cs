@@ -54,7 +54,7 @@ namespace Koopakiller.Apps.MusicManager.ViewModel
 
                 foreach (var fi in fis)
                 {
-                    this.ProcessFile(fi.FullName);
+                    this.ProcessFile(fi);
                 }
             }
         }
@@ -62,10 +62,25 @@ namespace Koopakiller.Apps.MusicManager.ViewModel
         public RelayCommand<DragEventArgs> DragOverCommand { get; }
         public RelayCommand<DragEventArgs> DropCommand { get; }
 
-        private void ProcessFile(string file)
+        private void ProcessFile(FileInfo fi)
         {
-            var pb = new PathBuilder(Properties.Settings.Default.MusicPath, Properties.Settings.Default.ImportPathPattern);
+            var tag = TagLib.File.Create(fi.FullName).Tag;
+            var pb = new PathBuilder(Properties.Settings.Default.MusicPath, Properties.Settings.Default.ImportPathPattern)
+            {
+                Replacements =
+                {
+                    ["Extension"]=fi.Extension,
+                    ["Title"]=tag.Title,
+                    ["JoinedAlbumArtists"]=tag.JoinedAlbumArtists,
+                    ["JoinedPerformers"]=tag.JoinedPerformers,
+                    ["Album"]=tag.Album,
+                    ["JoinedGenres"]=tag.JoinedGenres,
+                }
+            };
+
             var p = pb.Build();
+
+            File.Copy(fi.FullName, p);
         }
     }
 }

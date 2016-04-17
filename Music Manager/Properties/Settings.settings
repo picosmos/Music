@@ -9,7 +9,7 @@
       <Value Profile="(Default)">Playlists</Value>
     </Setting>
     <Setting Name="ImportPathPattern" Type="System.String" Scope="User">
-      <Value Profile="(Default)">&lt;Performers|AlbumArtists&gt;\&lt;Title&gt;.&lt;Extension&gt;</Value>
+      <Value Profile="(Default)">&lt;JoinedPerformers|JoinedAlbumArtists&gt;\&lt;Title&gt;&lt;Extension&gt;</Value>
     </Setting>
   </Settings>
 </SettingsFile>
