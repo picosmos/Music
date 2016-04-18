@@ -12,12 +12,14 @@ namespace Koopakiller.Apps.MusicManager.ViewModel
             this._fi = fi;
             this.Source = this._fi.FullName;
             this.Target = this.BuildTargetPath();
+            this.RaiseTargetIsValidChanged();
 
             this.ImportCommand = new RelayCommand(this.OnImport);
         }
 
         private readonly FileInfo _fi;
         private string _target;
+        private bool _targetFileAlreadyExists;
 
         private string BuildTargetPath()
         {
@@ -47,10 +49,42 @@ namespace Koopakiller.Apps.MusicManager.ViewModel
             {
                 this._target = value;
                 this.TargetFileAlreadyExists = File.Exists(this.Target);
+                this.RaisePropertyChanged();
+                this.RaiseTargetIsValidChanged();
             }
         }
 
-        public bool TargetFileAlreadyExists { get; private set; }
+        public bool TargetFileAlreadyExists
+        {
+            get { return this._targetFileAlreadyExists; }
+            private set
+            {
+                this._targetFileAlreadyExists = value;
+                this.RaisePropertyChanged();
+            }
+        }
+
+        public bool TargetIsValid
+        {
+            get
+            {
+                try
+                {
+                    //checks for illegal characters too
+                    return Path.GetFullPath(this.Source) != Path.GetFullPath(this.Target);
+                }
+                catch
+                {
+                    return false;
+                }
+            }
+        }
+
+        protected void RaiseTargetIsValidChanged()
+        {
+            // ReSharper disable once ExplicitCallerInfoArgument
+            this.RaisePropertyChanged(nameof(this.TargetIsValid));
+        }
 
         public ICommand ImportCommand { get; }
 
