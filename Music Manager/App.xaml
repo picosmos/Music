@@ -2,10 +2,17 @@
              StartupUri="MainWindow.xaml" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" d1p1:Ignorable="d" xmlns:d1p1="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:viewModel="clr-namespace:Koopakiller.Apps.MusicManager.ViewModel"
              xmlns:ui="clr-namespace:Koopakiller.Apps.MusicManager.UI">
-  <Application.Resources>
-    <ResourceDictionary>
-      <viewModel:ViewModelLocator x:Key="Locator" d:IsDataSource="True" />
+    <Application.Resources>
+        <ResourceDictionary>
+            <viewModel:ViewModelLocator x:Key="Locator" d:IsDataSource="True" />
             <ui:AutoTypeTemplateSelector x:Key="AutoTypeTemplateSelector"/>
-    </ResourceDictionary>
-  </Application.Resources>
+
+            <Style TargetType="Button">
+                <Setter Property="Padding" Value="14 3 14 3"/>
+                <Setter Property="Margin" Value="5"/>
+                <Setter Property="HorizontalAlignment" Value="Right"/>
+            </Style>
+
+        </ResourceDictionary>
+    </Application.Resources>
 </Application>
