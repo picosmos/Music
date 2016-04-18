@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:view="clr-namespace:Koopakiller.Apps.MusicManager.View"
         mc:Ignorable="d" DataContext="{Binding Main, Source={StaticResource Locator}}"
-        Title="MainWindow" Height="350" Width="525">
+        Title="Music Manager" Height="350" Width="525">
     <TabControl ItemsSource="{Binding Tabs}" ContentTemplateSelector="{StaticResource AutoTypeTemplateSelector}">
         <TabControl.ItemTemplate>
             <DataTemplate >
