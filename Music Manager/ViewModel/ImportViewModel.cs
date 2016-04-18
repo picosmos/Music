@@ -25,6 +25,7 @@ namespace Koopakiller.Apps.MusicManager.ViewModel
                     .Select(x => new FileInfo(x))
                     .Where(x => this._supportedFileExtensions.Any(y => y.Equals(x.Extension, StringComparison.InvariantCultureIgnoreCase)));
 
+                // ReSharper disable once ConvertIfStatementToConditionalTernaryExpression
                 if (fis.Any())
                 {
                     e.Effects = DragDropEffects.Copy;

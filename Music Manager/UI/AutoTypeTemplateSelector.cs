@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Windows;
-using System.Windows.Automation.Peers;
 using System.Windows.Controls;
 using System.Windows.Markup;
 
@@ -17,13 +16,12 @@ namespace Koopakiller.Apps.MusicManager.UI
             var typeName = item.GetType().FullName;
             typeName = typeName.Replace("ViewModel", "View");
             var type = Type.GetType(typeName);
-            if (type == null)
+            var viewModelType = item.GetType();
+            if (type?.Namespace == null || viewModelType.Namespace == null)
             {
                 return null;
             }
-
-
-            var viewModelType = item.GetType();
+            
 
             var xaml = $"<DataTemplate DataType=\"{{x:Type viewModel:{viewModelType.Name}}}\"><view:{type.Name} /></DataTemplate>";
 
