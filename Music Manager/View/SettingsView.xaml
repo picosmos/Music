@@ -6,127 +6,129 @@
              xmlns:viewModel="clr-namespace:Koopakiller.Apps.MusicManager.ViewModel"
              mc:Ignorable="d" d:DataContext="{d:DesignInstance viewModel:SettingsViewModel}"
              d:DesignHeight="300" d:DesignWidth="300">
-    <StackPanel>
-        <TextBlock Text="Music Path:" />
-        <TextBox Text="{Binding MusicPath, Mode=TwoWay}"/>
-        <TextBlock Text="Playlists Path:" />
-        <TextBox Text="{Binding PlaylistsPath, Mode=TwoWay}"/>
-        <TextBlock Text="Import Path Pattern:" />
-        <TextBox Text="{Binding ImportPathPattern, Mode=TwoWay}"/>
-        <RichTextBox IsReadOnly="true" BorderThickness="0">
-            <FlowDocument>
-                <Paragraph>
-                    Available Patterns:
-                </Paragraph>
-                <Table>
-                    <TableRowGroup FontWeight="Bold">
-                        <TableRow>
-                            <TableCell>
-                                <Paragraph>
-                                    <Run Text="Pattern"/>
-                                </Paragraph>
-                            </TableCell>
-                            <TableCell>
-                                <Paragraph>
-                                    <Run Text="Example"/>
-                                </Paragraph>
-                            </TableCell>
-                        </TableRow>
-                    </TableRowGroup>
-                    <TableRowGroup >
-                        <TableRow>
-                            <TableCell>
-                                <Paragraph>
-                                    <Run Text="\"/>
-                                </Paragraph>
-                            </TableCell>
-                            <TableCell>
-                                <Paragraph>
-                                    <Run Text="Folder\Inner folder"/>
-                                </Paragraph>
-                            </TableCell>
-                        </TableRow>
-                    </TableRowGroup>
-                    <TableRowGroup>
-                        <TableRow>
-                            <TableCell>
-                                <Paragraph>
-                                    <Run Text="Extension"/>
-                                </Paragraph>
-                            </TableCell>
-                            <TableCell>
-                                <Paragraph>
-                                    <Run Text=".mp3"/>
-                                </Paragraph>
-                            </TableCell>
-                        </TableRow>
-                        <TableRow>
-                            <TableCell>
-                                <Paragraph>
-                                    <Run Text="Title"/>
-                                </Paragraph>
-                            </TableCell>
-                            <TableCell>
-                                <Paragraph>
-                                    <Run Text="Children"/>
-                                </Paragraph>
-                            </TableCell>
-                        </TableRow>
-                        <TableRow>
-                            <TableCell>
-                                <Paragraph>
-                                    <Run Text="JoinedAlbumArtists"/>
-                                </Paragraph>
-                            </TableCell>
-                            <TableCell>
-                                <Paragraph>
-                                    <Run Text="Roberto Concina"/>
-                                </Paragraph>
-                            </TableCell>
-                        </TableRow>
-                        <TableRow>
-                            <TableCell>
-                                <Paragraph>
-                                    <Run Text="JoinedPerformers"/>
-                                </Paragraph>
-                            </TableCell>
-                            <TableCell>
-                                <Paragraph>
-                                    <Run Text="Robert Miles"/>
-                                </Paragraph>
-                            </TableCell>
-                        </TableRow>
-                        <TableRow>
-                            <TableCell>
-                                <Paragraph>
-                                    <Run Text="Album"/>
-                                </Paragraph>
-                            </TableCell>
-                            <TableCell>
-                                <Paragraph>
-                                    <Run Text="Dreamland"/>
-                                </Paragraph>
-                            </TableCell>
-                        </TableRow>
-                        <TableRow>
-                            <TableCell>
-                                <Paragraph>
-                                    <Run Text="JoinedGenres"/>
-                                </Paragraph>
-                            </TableCell>
-                            <TableCell>
-                                <Paragraph>
-                                    <Run Text="Trance"/>
-                                </Paragraph>
-                            </TableCell>
-                        </TableRow>
-                    </TableRowGroup>
-                </Table>
-            </FlowDocument>
-        </RichTextBox>
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-            <Button Command="{Binding SaveCommand}" Content="Save"/>
-            <Button Command="{Binding ResetCommand}" Content="Reset"/>
+    <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+        <StackPanel>
+            <TextBlock Text="Music Path:" />
+            <TextBox Text="{Binding MusicPath, Mode=TwoWay}"/>
+            <TextBlock Text="Playlists Path:" />
+            <TextBox Text="{Binding PlaylistsPath, Mode=TwoWay}"/>
+            <TextBlock Text="Import Path Pattern:" />
+            <TextBox Text="{Binding ImportPathPattern, Mode=TwoWay}"/>
+            <RichTextBox IsReadOnly="true" BorderThickness="0">
+                <FlowDocument>
+                    <Paragraph>
+                        Available Patterns:
+                    </Paragraph>
+                    <Table>
+                        <TableRowGroup FontWeight="Bold">
+                            <TableRow>
+                                <TableCell>
+                                    <Paragraph>
+                                        <Run Text="Pattern"/>
+                                    </Paragraph>
+                                </TableCell>
+                                <TableCell>
+                                    <Paragraph>
+                                        <Run Text="Example"/>
+                                    </Paragraph>
+                                </TableCell>
+                            </TableRow>
+                        </TableRowGroup>
+                        <TableRowGroup >
+                            <TableRow>
+                                <TableCell>
+                                    <Paragraph>
+                                        <Run Text="\"/>
+                                    </Paragraph>
+                                </TableCell>
+                                <TableCell>
+                                    <Paragraph>
+                                        <Run Text="Folder\Inner folder"/>
+                                    </Paragraph>
+                                </TableCell>
+                            </TableRow>
+                        </TableRowGroup>
+                        <TableRowGroup>
+                            <TableRow>
+                                <TableCell>
+                                    <Paragraph>
+                                        <Run Text="Extension"/>
+                                    </Paragraph>
+                                </TableCell>
+                                <TableCell>
+                                    <Paragraph>
+                                        <Run Text=".mp3"/>
+                                    </Paragraph>
+                                </TableCell>
+                            </TableRow>
+                            <TableRow>
+                                <TableCell>
+                                    <Paragraph>
+                                        <Run Text="Title"/>
+                                    </Paragraph>
+                                </TableCell>
+                                <TableCell>
+                                    <Paragraph>
+                                        <Run Text="Children"/>
+                                    </Paragraph>
+                                </TableCell>
+                            </TableRow>
+                            <TableRow>
+                                <TableCell>
+                                    <Paragraph>
+                                        <Run Text="JoinedAlbumArtists"/>
+                                    </Paragraph>
+                                </TableCell>
+                                <TableCell>
+                                    <Paragraph>
+                                        <Run Text="Roberto Concina"/>
+                                    </Paragraph>
+                                </TableCell>
+                            </TableRow>
+                            <TableRow>
+                                <TableCell>
+                                    <Paragraph>
+                                        <Run Text="JoinedPerformers"/>
+                                    </Paragraph>
+                                </TableCell>
+                                <TableCell>
+                                    <Paragraph>
+                                        <Run Text="Robert Miles"/>
+                                    </Paragraph>
+                                </TableCell>
+                            </TableRow>
+                            <TableRow>
+                                <TableCell>
+                                    <Paragraph>
+                                        <Run Text="Album"/>
+                                    </Paragraph>
+                                </TableCell>
+                                <TableCell>
+                                    <Paragraph>
+                                        <Run Text="Dreamland"/>
+                                    </Paragraph>
+                                </TableCell>
+                            </TableRow>
+                            <TableRow>
+                                <TableCell>
+                                    <Paragraph>
+                                        <Run Text="JoinedGenres"/>
+                                    </Paragraph>
+                                </TableCell>
+                                <TableCell>
+                                    <Paragraph>
+                                        <Run Text="Trance"/>
+                                    </Paragraph>
+                                </TableCell>
+                            </TableRow>
+                        </TableRowGroup>
+                    </Table>
+                </FlowDocument>
+            </RichTextBox>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <Button Command="{Binding SaveCommand}" Content="Save"/>
+                <Button Command="{Binding ResetCommand}" Content="Reset"/>
+            </StackPanel>
         </StackPanel>
-    </StackPanel>
+    </ScrollViewer>
 </UserControl>
