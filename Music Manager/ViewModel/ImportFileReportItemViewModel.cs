@@ -14,9 +14,9 @@ namespace Koopakiller.Apps.MusicManager.ViewModel
             this._fi = fi;
             this.Source = this._fi.FullName;
             this.Target = this.BuildTargetPath();
-            this.RaiseTargetIsValidChanged();
+            this.RaiseImportShouldBePossibleChanged();
 
-            this.ImportCommand = new RelayCommand(this.OnImport);
+            this.ImportCommand = new RelayCommand(this.Import);
         }
 
         private readonly FileInfo _fi;
@@ -52,7 +52,7 @@ namespace Koopakiller.Apps.MusicManager.ViewModel
                 this._target = value;
                 this.TargetFileAlreadyExists = File.Exists(this.Target);
                 this.RaisePropertyChanged();
-                this.RaiseTargetIsValidChanged();
+                this.RaiseImportShouldBePossibleChanged();
             }
         }
 
@@ -66,7 +66,7 @@ namespace Koopakiller.Apps.MusicManager.ViewModel
             }
         }
 
-        public bool TargetIsValid
+        public bool ImportShouldBePossible
         {
             get
             {
@@ -82,15 +82,15 @@ namespace Koopakiller.Apps.MusicManager.ViewModel
             }
         }
 
-        protected void RaiseTargetIsValidChanged()
+        protected void RaiseImportShouldBePossibleChanged()
         {
             // ReSharper disable once ExplicitCallerInfoArgument
-            this.RaisePropertyChanged(nameof(this.TargetIsValid));
+            this.RaisePropertyChanged(nameof(this.ImportShouldBePossible));
         }
 
         public ICommand ImportCommand { get; }
 
-        private void OnImport()
+        public void Import()
         {
             try
             {
