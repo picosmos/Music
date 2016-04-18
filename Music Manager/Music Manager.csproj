@@ -86,12 +86,18 @@
     <Compile Include="Helper\PathBuilder.cs" />
     <Compile Include="UI\AutoTypeTemplateSelector.cs" />
     <Compile Include="ViewModel\HeaderViewModelBase.cs" />
+    <Compile Include="ViewModel\ImportFileReportItemViewModel.cs" />
     <Compile Include="ViewModel\ImportViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
+    <Compile Include="ViewModel\ReportItemViewModelBase.cs" />
+    <Compile Include="ViewModel\ReportViewModel.cs" />
     <Compile Include="ViewModel\SettingsViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Compile Include="View\ImportView.xaml.cs">
       <DependentUpon>ImportView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ReportView.xaml.cs">
+      <DependentUpon>ReportView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\SettingsView.xaml.cs">
       <DependentUpon>SettingsView.xaml</DependentUpon>
@@ -109,6 +115,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="View\ImportView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ReportView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

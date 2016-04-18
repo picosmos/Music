@@ -24,6 +24,7 @@ namespace Koopakiller.Apps.MusicManager.ViewModel
         {
             this.Tabs = new ObservableCollection<HeaderViewModelBase>()
             {
+                ReportViewModel.Instance,
                 new ImportViewModel(),
                 new SettingsViewModel(),
             };

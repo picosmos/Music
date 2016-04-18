@@ -1,11 +1,8 @@
 ﻿using System;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
 using System.Windows;
 using GalaSoft.MvvmLight.Command;
-using Koopakiller.Apps.MusicManager.Helper;
 
 namespace Koopakiller.Apps.MusicManager.ViewModel
 {
@@ -64,23 +61,7 @@ namespace Koopakiller.Apps.MusicManager.ViewModel
 
         private void ProcessFile(FileInfo fi)
         {
-            var tag = TagLib.File.Create(fi.FullName).Tag;
-            var pb = new PathBuilder(Properties.Settings.Default.MusicPath, Properties.Settings.Default.ImportPathPattern)
-            {
-                Replacements =
-                {
-                    ["Extension"]=fi.Extension,
-                    ["Title"]=tag.Title,
-                    ["JoinedAlbumArtists"]=tag.JoinedAlbumArtists,
-                    ["JoinedPerformers"]=tag.JoinedPerformers,
-                    ["Album"]=tag.Album,
-                    ["JoinedGenres"]=tag.JoinedGenres,
-                }
-            };
-
-            var p = pb.Build();
-
-            File.Copy(fi.FullName, p);
+            ReportViewModel.Instance.Items.Add(new ImportFileReportItemViewModel(fi));
         }
     }
 }
