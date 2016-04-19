@@ -9,7 +9,7 @@
              mc:Ignorable="d" d:DataContext="{d:DesignInstance viewModel:ImportViewModel}"
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid>
-        <Border AllowDrop="True" Background="#F0F0F0">
+        <Button AllowDrop="True" Background="#F0F0F0" Content="Drop music files" FontSize="24" Command="{Binding OpenCommand}">
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="Drop">
                     <command:EventToCommand  Command="{Binding DropCommand}" PassEventArgsToCommand="True"/>
@@ -18,7 +18,6 @@
                     <command:EventToCommand  Command="{Binding DragOverCommand}" PassEventArgsToCommand="True"/>
                 </i:EventTrigger>
             </i:Interaction.Triggers>
-            <TextBlock Text="Drop music files" FontSize="24" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-        </Border>
+        </Button>
     </Grid>
 </UserControl>

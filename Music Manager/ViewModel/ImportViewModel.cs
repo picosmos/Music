@@ -2,7 +2,9 @@
 using System.IO;
 using System.Linq;
 using System.Windows;
-using GalaSoft.MvvmLight.Command;
+using System.Windows.Input;
+using GalaSoft.MvvmLight.CommandWpf;
+using Koopakiller.Apps.MusicManager.Dialogs;
 
 namespace Koopakiller.Apps.MusicManager.ViewModel
 {
@@ -10,6 +12,7 @@ namespace Koopakiller.Apps.MusicManager.ViewModel
     {
         public ImportViewModel() : base("Import")
         {
+            this.OpenCommand = new RelayCommand(this.OnOpen);
             this.DragOverCommand = new RelayCommand<DragEventArgs>(this.OnDragOver);
             this.DropCommand = new RelayCommand<DragEventArgs>(this.OnDrop);
         }
@@ -59,6 +62,28 @@ namespace Koopakiller.Apps.MusicManager.ViewModel
 
         public RelayCommand<DragEventArgs> DragOverCommand { get; }
         public RelayCommand<DragEventArgs> DropCommand { get; }
+        public ICommand OpenCommand { get; }
+        
+        private void OnOpen()
+        {
+            if (DialogFactories.OpenFileDialogFactory == null)
+            {
+                throw new NullReferenceException($"{nameof(DialogFactories.OpenFileDialogFactory)} is not assigned");
+            }
+
+            var dlg = DialogFactories.OpenFileDialogFactory.CreateDialog();
+            dlg.Filter = "Music files (*.flac;*.mp3;*.wav;*.m4a)|*.flac;*.mp3;*.wav;*.m4a";
+            dlg.Multiselect = true;
+            if (!dlg.Show())
+            {
+                return;
+            }
+
+            foreach (var file in dlg.FileNames)
+            {
+                this.ProcessFile(new FileInfo(file));
+            }
+        }
 
         private void ProcessFile(FileInfo fi)
         {

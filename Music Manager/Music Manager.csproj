@@ -85,6 +85,13 @@
     </ApplicationDefinition>
     <Compile Include="Converter\AreEqualConverter.cs" />
     <Compile Include="Converter\BooleanToVisibilityConverter.cs" />
+    <Compile Include="Dialogs\DialogFactories.cs" />
+    <Compile Include="Dialogs\FileDialog.cs" />
+    <Compile Include="Dialogs\IDialogFactory.cs" />
+    <Compile Include="Dialogs\IFileDialog.cs" />
+    <Compile Include="Dialogs\IOpenFileDialog.cs" />
+    <Compile Include="Dialogs\OpenFileDialog.cs" />
+    <Compile Include="Dialogs\OpenFileDialogFactory.cs" />
     <Compile Include="Helper\PathBuilder.cs" />
     <Compile Include="UI\AutoTypeTemplateSelector.cs" />
     <Compile Include="ViewModel\HeaderViewModelBase.cs" />
