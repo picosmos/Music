@@ -4,6 +4,8 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:viewModel="clr-namespace:Koopakiller.Apps.MusicManager.ViewModel"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:command="http://www.galasoft.ch/mvvmlight"
              mc:Ignorable="d" d:DataContext="{d:DesignInstance viewModel:PlaylistsViewModel}"
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid>
@@ -54,11 +56,22 @@
                             <Button Content="Delete" Command="{Binding DeleteCommand}" />
                         </StackPanel>
                         <Expander Grid.ColumnSpan="2" Grid.Row="1" Grid.Column="0" Header="Songs">
-                            <Grid>
+                            <Grid Background="White" AllowDrop="True">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="Auto"/>
                                     <RowDefinition Height="*"/>
                                 </Grid.RowDefinitions>
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="Drop">
+                                        <command:EventToCommand  Command="{Binding DropCommand}" PassEventArgsToCommand="True"/>
+                                    </i:EventTrigger>
+                                    <i:EventTrigger EventName="DragOver">
+                                        <command:EventToCommand  Command="{Binding DragOverCommand}" PassEventArgsToCommand="True"/>
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                                <StackPanel Orientation="Horizontal">
+                                    <Button Content="Click or drop music files to add" Command="{Binding AddMusicFileCommand}"/>
+                                </StackPanel>
                                 <ItemsControl Grid.Row="1" ItemsSource="{Binding SongFiles}">
                                     <ItemsControl.ItemsPanel>
                                         <ItemsPanelTemplate>
