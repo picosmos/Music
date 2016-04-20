@@ -39,7 +39,7 @@
                         </StackPanel>
                     </Grid>
                 </DataTemplate>
-                <DataTemplate DataType="{x:Type viewModel:PlayListItemViewModel}">
+                <DataTemplate DataType="{x:Type viewModel:PlaylistItemViewModel}">
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>

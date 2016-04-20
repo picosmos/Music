@@ -39,7 +39,7 @@ namespace Koopakiller.Apps.MusicManager.ViewModel
                         }
                         else
                         {
-                            this.Playlists.Add(PlayListItemViewModel.LoadFile(file));
+                            this.Playlists.Add(PlaylistItemViewModel.LoadFile(file));
                         }
                         break;//read only first file
                     }
@@ -80,7 +80,7 @@ namespace Koopakiller.Apps.MusicManager.ViewModel
 
         private void OnAddPlaylist()
         {
-            this.Playlists.Add(new PlayListItemViewModel());
+            this.Playlists.Add(new PlaylistItemViewModel());
         }
 
         private void OnAddAllSongsPlaylist()

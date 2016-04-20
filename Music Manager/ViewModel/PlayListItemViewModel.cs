@@ -12,11 +12,11 @@ using Koopakiller.Apps.MusicManager.Helper;
 
 namespace Koopakiller.Apps.MusicManager.ViewModel
 {
-    public class PlayListItemViewModel : PlaylistItemViewModelBase
+    public class PlaylistItemViewModel : PlaylistItemViewModelBase
     {
         private bool _hasUnsavedChanges;
 
-        public PlayListItemViewModel()
+        public PlaylistItemViewModel()
         {
             this.SaveCommand = new RelayCommand(this.Save, () => this.HasUnsavedChanges);
             this.AddMusicFileCommand = new RelayCommand(this.OnAddMusicFile);
@@ -157,9 +157,9 @@ namespace Koopakiller.Apps.MusicManager.ViewModel
             this.HasUnsavedChanges = false;
         }
 
-        public static PlayListItemViewModel LoadFile(string file)
+        public static PlaylistItemViewModel LoadFile(string file)
         {
-            var pl = new PlayListItemViewModel
+            var pl = new PlaylistItemViewModel
             {
                 Name = Path.GetFileNameWithoutExtension(file)
             };
