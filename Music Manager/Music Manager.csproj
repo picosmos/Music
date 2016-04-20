@@ -95,10 +95,12 @@
     <Compile Include="Helper\MusicFileHelper.cs" />
     <Compile Include="Helper\PathBuilder.cs" />
     <Compile Include="UI\AutoTypeTemplateSelector.cs" />
+    <Compile Include="ViewModel\AllSongsPlaylistViewModel.cs" />
     <Compile Include="ViewModel\HeaderViewModelBase.cs" />
     <Compile Include="ViewModel\ImportFileReportItemViewModel.cs" />
     <Compile Include="ViewModel\ImportViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
+    <Compile Include="ViewModel\PlaylistItemViewModelBase.cs" />
     <Compile Include="ViewModel\PlaylistsViewModel.cs" />
     <Compile Include="ViewModel\ReportItemViewModelBase.cs" />
     <Compile Include="ViewModel\ReportViewModel.cs" />
