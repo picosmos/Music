@@ -13,6 +13,7 @@ namespace Koopakiller.Apps.MusicManager.ViewModel
         public PlaylistsViewModel() : base("Playlists")
         {
             this.Playlists = new ObservableCollection<PlaylistItemViewModelBase>();
+            this.AddPlaylistCommand = new RelayCommand(this.OnAddPlaylist);
             this.Playlists.CollectionChanged += this.OnPlaylistsChanged;
 
             this.AddAllSongsPlaylistCommand = new RelayCommand(this.OnAddAllSongsPlaylist, () => !this.AllSongsPlaylistExists);
@@ -75,6 +76,12 @@ namespace Koopakiller.Apps.MusicManager.ViewModel
         private bool AllSongsPlaylistExists => this.Playlists.OfType<AllSongsPlaylistViewModel>().Any();
 
         public ICommand AddAllSongsPlaylistCommand { get; }
+        public ICommand AddPlaylistCommand { get; }
+
+        private void OnAddPlaylist()
+        {
+            this.Playlists.Add(new PlayListItemViewModel());
+        }
 
         private void OnAddAllSongsPlaylist()
         {
