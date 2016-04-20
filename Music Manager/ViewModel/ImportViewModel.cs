@@ -5,6 +5,7 @@ using System.Windows;
 using System.Windows.Input;
 using GalaSoft.MvvmLight.CommandWpf;
 using Koopakiller.Apps.MusicManager.Dialogs;
+using Koopakiller.Apps.MusicManager.Helper;
 
 namespace Koopakiller.Apps.MusicManager.ViewModel
 {
@@ -16,9 +17,7 @@ namespace Koopakiller.Apps.MusicManager.ViewModel
             this.DragOverCommand = new RelayCommand<DragEventArgs>(this.OnDragOver);
             this.DropCommand = new RelayCommand<DragEventArgs>(this.OnDrop);
         }
-
-        private readonly string[] _supportedFileExtensions = new[] { ".mp3", ".wav", ".m4a", ".flac" };
-
+        
         private void OnDragOver(DragEventArgs e)
         {
             var formats = e.Data.GetFormats();
@@ -26,7 +25,7 @@ namespace Koopakiller.Apps.MusicManager.ViewModel
             {
                 var fis = ((string[])e.Data.GetData(DataFormats.FileDrop))
                     .Select(x => new FileInfo(x))
-                    .Where(x => this._supportedFileExtensions.Any(y => y.Equals(x.Extension, StringComparison.InvariantCultureIgnoreCase)));
+                    .Where(x => MusicFileHelper.SupportedFileExtensions.Any(y => y.Equals(x.Extension, StringComparison.InvariantCultureIgnoreCase)));
 
                 // ReSharper disable once ConvertIfStatementToConditionalTernaryExpression
                 if (fis.Any())
@@ -51,7 +50,7 @@ namespace Koopakiller.Apps.MusicManager.ViewModel
             {
                 var fis = ((string[])e.Data.GetData(DataFormats.FileDrop))
                     .Select(x => new FileInfo(x))
-                    .Where(x => this._supportedFileExtensions.Any(y => y.Equals(x.Extension, StringComparison.InvariantCultureIgnoreCase)));
+                    .Where(x => MusicFileHelper.SupportedFileExtensions.Any(y => y.Equals(x.Extension, StringComparison.InvariantCultureIgnoreCase)));
 
                 foreach (var fi in fis)
                 {

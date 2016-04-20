@@ -27,6 +27,7 @@ namespace Koopakiller.Apps.MusicManager.ViewModel
                 ReportViewModel.Instance,
                 new ImportViewModel(),
                 new SettingsViewModel(),
+                new PlaylistsViewModel()
             };
         }
 
