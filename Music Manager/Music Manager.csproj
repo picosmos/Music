@@ -92,7 +92,7 @@
     <Compile Include="Dialogs\IOpenFileDialog.cs" />
     <Compile Include="Dialogs\OpenFileDialog.cs" />
     <Compile Include="Dialogs\OpenFileDialogFactory.cs" />
-    <Compile Include="Helper\MusicFileHelper.cs" />
+    <Compile Include="Helper\FileSystemHelper.cs" />
     <Compile Include="Helper\PathBuilder.cs" />
     <Compile Include="UI\AutoTypeTemplateSelector.cs" />
     <Compile Include="ViewModel\AllSongsPlaylistViewModel.cs" />

@@ -1,8 +1,10 @@
 ﻿using System.Collections.ObjectModel;
 using System.Collections.Specialized;
+using System.IO;
 using System.Linq;
 using System.Windows.Input;
 using GalaSoft.MvvmLight.Command;
+using Koopakiller.Apps.MusicManager.Helper;
 
 namespace Koopakiller.Apps.MusicManager.ViewModel
 {
@@ -14,6 +16,34 @@ namespace Koopakiller.Apps.MusicManager.ViewModel
             this.Playlists.CollectionChanged += this.OnPlaylistsChanged;
 
             this.AddAllSongsPlaylistCommand = new RelayCommand(this.OnAddAllSongsPlaylist, () => !this.AllSongsPlaylistExists);
+
+            this.LoadPlaylistFiles();
+        }
+
+        void LoadPlaylistFiles()
+        {
+            var path = Properties.Settings.Default.PlaylistsPath;
+            if (Directory.Exists(path))
+            {
+                foreach (var file in FileSystemHelper.GetFilesFromDirectory(path, new string[] { ".m3u" }))
+                {
+                    foreach (var line in File.ReadLines(file))
+                    {
+                        if (line == "#" + AllSongsPlaylistViewModel.FileIdentifier)
+                        {
+                            this.Playlists.Add(new AllSongsPlaylistViewModel()
+                            {
+                                Name = Path.GetFileNameWithoutExtension(file),
+                            });
+                        }
+                        else
+                        {
+
+                        }
+                        break;
+                    }
+                }
+            }
         }
 
         private void OnPlaylistsChanged(object sender, NotifyCollectionChangedEventArgs e)

@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Windows.Input;
@@ -10,6 +9,7 @@ namespace Koopakiller.Apps.MusicManager.ViewModel
 {
     public class AllSongsPlaylistViewModel : PlaylistItemViewModelBase
     {
+        internal const string FileIdentifier = "MusicManager.AllSongsPlaylist";
         public AllSongsPlaylistViewModel()
         {
             this.Name = "All";
@@ -28,32 +28,15 @@ namespace Koopakiller.Apps.MusicManager.ViewModel
             }
             using (var sw = new StreamWriter(new FileStream(path, FileMode.Create)))
             {
-                sw.WriteLine("#MusicManager.AllSongsPlaylist");
-                foreach (var file in this.GetMusicFiles(Properties.Settings.Default.MusicPath))
+                sw.WriteLine("#"+ FileIdentifier);
+                foreach (var file in FileSystemHelper.GetFilesFromDirectory(Properties.Settings.Default.MusicPath, FileSystemHelper.SupportedMusicFileExtensions))
                 {
                     var fi = new FileInfo(file);
-                    if (MusicFileHelper.SupportedFileExtensions.Any(x => fi.Extension.Equals(x, StringComparison.InvariantCultureIgnoreCase)))
+                    if (FileSystemHelper.SupportedMusicFileExtensions.Any(x => fi.Extension.Equals(x, StringComparison.InvariantCultureIgnoreCase)))
                     {
                         sw.WriteLine(file);
                     }
                 }
-            }
-        }
-
-        private IEnumerable<string> GetMusicFiles(string folder)
-        {
-            foreach (var file in Directory.GetFiles(folder))
-            {
-                var fi = new FileInfo(file);
-                if (MusicFileHelper.SupportedFileExtensions.Any(x => fi.Extension.Equals(x, StringComparison.InvariantCultureIgnoreCase)))
-                {
-                    yield return file;
-                }
-            }
-
-            foreach (var file in Directory.GetDirectories(folder).SelectMany(this.GetMusicFiles))
-            {
-                yield return file;
             }
         }
     }

@@ -25,7 +25,7 @@ namespace Koopakiller.Apps.MusicManager.ViewModel
             {
                 var fis = ((string[])e.Data.GetData(DataFormats.FileDrop))
                     .Select(x => new FileInfo(x))
-                    .Where(x => MusicFileHelper.SupportedFileExtensions.Any(y => y.Equals(x.Extension, StringComparison.InvariantCultureIgnoreCase)));
+                    .Where(x => FileSystemHelper.SupportedMusicFileExtensions.Any(y => y.Equals(x.Extension, StringComparison.InvariantCultureIgnoreCase)));
 
                 // ReSharper disable once ConvertIfStatementToConditionalTernaryExpression
                 if (fis.Any())
@@ -50,7 +50,7 @@ namespace Koopakiller.Apps.MusicManager.ViewModel
             {
                 var fis = ((string[])e.Data.GetData(DataFormats.FileDrop))
                     .Select(x => new FileInfo(x))
-                    .Where(x => MusicFileHelper.SupportedFileExtensions.Any(y => y.Equals(x.Extension, StringComparison.InvariantCultureIgnoreCase)));
+                    .Where(x => FileSystemHelper.SupportedMusicFileExtensions.Any(y => y.Equals(x.Extension, StringComparison.InvariantCultureIgnoreCase)));
 
                 foreach (var fi in fis)
                 {
