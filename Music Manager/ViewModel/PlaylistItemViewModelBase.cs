@@ -18,6 +18,7 @@ namespace Koopakiller.Apps.MusicManager.ViewModel
             this.OpenFolderCommand = new RelayCommand(this.OnOpenFolder);
         }
 
+
         public string Name
         {
             get { return this._name; }

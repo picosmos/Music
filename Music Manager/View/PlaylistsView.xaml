@@ -30,7 +30,7 @@
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
-                        <TextBox Text="{Binding Name, Mode=TwoWay}"/>
+                        <TextBox Text="{Binding Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                         <StackPanel Grid.Column="1" HorizontalAlignment="Right" Orientation="Horizontal">
                             <Button Content="Update" Command="{Binding UpdateSongsCommand}" />
                             <Button Content="Open Folder" Command="{Binding OpenFolderCommand}" />
@@ -49,8 +49,9 @@
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="*"/>
                         </Grid.RowDefinitions>
-                        <TextBox Text="{Binding Name, Mode=TwoWay}"/>
+                        <TextBox Text="{Binding Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                         <StackPanel Grid.Row="0" Grid.Column="01" HorizontalAlignment="Right" Orientation="Horizontal">
+                            <Button Content="Save" Command="{Binding SaveCommand}"/>
                             <Button Content="Open Folder" Command="{Binding OpenFolderCommand}" />
                             <Button Content="Open" Command="{Binding OpenCommand}" />
                             <Button Content="Delete" Command="{Binding DeleteCommand}" />
