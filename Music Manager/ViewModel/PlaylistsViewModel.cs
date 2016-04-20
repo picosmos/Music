@@ -21,7 +21,7 @@ namespace Koopakiller.Apps.MusicManager.ViewModel
             this.LoadPlaylistFiles();
         }
 
-        void LoadPlaylistFiles()
+        private void LoadPlaylistFiles()
         {
             var path = Properties.Settings.Default.PlaylistsPath;
             if (Directory.Exists(path))
