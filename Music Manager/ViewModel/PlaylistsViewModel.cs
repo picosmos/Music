@@ -40,7 +40,7 @@ namespace Koopakiller.Apps.MusicManager.ViewModel
                         {
                             this.Playlists.Add(PlayListItemViewModel.LoadFile(file));
                         }
-                        break;
+                        break;//read only first file
                     }
                 }
             }
