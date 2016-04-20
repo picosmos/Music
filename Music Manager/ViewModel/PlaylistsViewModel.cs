@@ -48,7 +48,26 @@ namespace Koopakiller.Apps.MusicManager.ViewModel
 
         private void OnPlaylistsChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
+            if (e.NewItems != null)
+            {
+                foreach (PlaylistItemViewModelBase playlist in e.NewItems)
+                {
+                    playlist.DeleteRequested += this.OnPlayListDeleteRequested;
+                }
+            }
+            if (e.OldItems != null)
+            {
+                foreach (PlaylistItemViewModelBase playlist in e.OldItems)
+                {
+                    playlist.DeleteRequested -= this.OnPlayListDeleteRequested;
+                }
+            }
             ((RelayCommand)this.AddAllSongsPlaylistCommand).RaiseCanExecuteChanged();
+        }
+
+        private void OnPlayListDeleteRequested(object sender, PlaylistItemViewModelBase item)
+        {
+            this.Playlists.Remove(item);
         }
 
         public ObservableCollection<PlaylistItemViewModelBase> Playlists { get; }

@@ -1,3 +1,4 @@
+using System;
 using System.Diagnostics;
 using System.IO;
 using System.Windows.Input;
@@ -12,6 +13,7 @@ namespace Koopakiller.Apps.MusicManager.ViewModel
 
         protected PlaylistItemViewModelBase()
         {
+            this.DeleteCommand = new RelayCommand(this.OnDelete);
             this.OpenCommand = new RelayCommand(this.OnOpen);
             this.OpenFolderCommand = new RelayCommand(this.OnOpenFolder);
         }
@@ -37,7 +39,21 @@ namespace Koopakiller.Apps.MusicManager.ViewModel
 
         public ICommand OpenFolderCommand { get; }
         public ICommand OpenCommand { get; }
+        public ICommand DeleteCommand { get; }
 
+        private void OnDelete()
+        {
+            var path = this.GetPlaylistfilePath();
+
+            this.DeleteRequested?.Invoke(this, this);
+
+            if (File.Exists(path))
+            {
+                File.Delete(path);
+            }
+        }
+
+        public event EventHandler<PlaylistItemViewModelBase> DeleteRequested;
 
         private void OnOpenFolder()
         {

@@ -32,6 +32,7 @@
                             <Button Content="Update" Command="{Binding UpdateSongsCommand}" />
                             <Button Content="Open Folder" Command="{Binding OpenFolderCommand}" />
                             <Button Content="Open" Command="{Binding OpenCommand}" />
+                            <Button Content="Delete" Command="{Binding DeleteCommand}" />
                         </StackPanel>
                     </Grid>
                 </DataTemplate>
