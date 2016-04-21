@@ -21,7 +21,7 @@ namespace Koopakiller.Apps.MusicManager.ViewModel
             this.DropCommand = new RelayCommand<DragEventArgs>(this.OnDrop);
 
             this.Items = new ObservableCollection<ImportFileReportItemViewModel>();
-            this.ImportAllCommand = new RelayCommand(this.OnImportAll, () => this.Items.OfType<ImportFileReportItemViewModel>().Any(x => x.ImportShouldBePossible));
+            this.ImportAllCommand = new RelayCommand(this.OnImportAll, () => this.Items.Any(x => x.ImportShouldBePossible));
             this.Items.CollectionChanged += this.OnItemsChanged;
 
             this.DeleteCommand = new RelayCommand<ImportFileReportItemViewModel>(this.DeleteItem);
@@ -37,8 +37,7 @@ namespace Koopakiller.Apps.MusicManager.ViewModel
 
         private void OnImportAll()
         {
-            foreach (var file in this.Items.OfType<ImportFileReportItemViewModel>()
-                                           .Where(x => x.ImportShouldBePossible)
+            foreach (var file in this.Items.Where(x => x.ImportShouldBePossible)
                                            .ToArray())
             {
                 file.Import();
