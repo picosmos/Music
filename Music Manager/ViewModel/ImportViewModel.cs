@@ -20,12 +20,21 @@ namespace Koopakiller.Apps.MusicManager.ViewModel
             this.DragOverCommand = new RelayCommand<DragEventArgs>(this.OnDragOver);
             this.DropCommand = new RelayCommand<DragEventArgs>(this.OnDrop);
 
-            this.Items = new ObservableCollection<ReportItemViewModelBase>();
+            this.Items = new ObservableCollection<ImportFileReportItemViewModel>();
             this.ImportAllCommand = new RelayCommand(this.OnImportAll, () => this.Items.OfType<ImportFileReportItemViewModel>().Any(x => x.ImportShouldBePossible));
             this.Items.CollectionChanged += this.OnItemsChanged;
 
-            this.DeleteCommand = new RelayCommand<ReportItemViewModelBase>(this.DeleteItem);
+            this.DeleteCommand = new RelayCommand<ImportFileReportItemViewModel>(this.DeleteItem);
+
+            if (this.IsInDesignMode)
+            {
+                for (int i = 0; i < 10; ++i)
+                {
+                    this.Items.Add(new ImportFileReportItemViewModel(new FileInfo(@"C:\Test\Testfile" + i + ".mp3")));
+                }
+            }
         }
+
         private void OnImportAll()
         {
             foreach (var file in this.Items.OfType<ImportFileReportItemViewModel>()
@@ -40,7 +49,7 @@ namespace Koopakiller.Apps.MusicManager.ViewModel
         {
             if (e.NewItems != null)
             {
-                foreach (ReportItemViewModelBase item in e.NewItems)
+                foreach (ImportFileReportItemViewModel item in e.NewItems)
                 {
                     item.RequestRemoveItem += this.OnRequestRemoveItem;
                     item.PropertyChanged += this.OnItemPropertyChanged;
@@ -48,7 +57,7 @@ namespace Koopakiller.Apps.MusicManager.ViewModel
             }
             if (e.OldItems != null)
             {
-                foreach (ReportItemViewModelBase item in e.OldItems)
+                foreach (ImportFileReportItemViewModel item in e.OldItems)
                 {
                     item.RequestRemoveItem -= this.OnRequestRemoveItem;
                     item.PropertyChanged -= this.OnItemPropertyChanged;
@@ -68,17 +77,17 @@ namespace Koopakiller.Apps.MusicManager.ViewModel
             }
         }
 
-        private void OnRequestRemoveItem(object sender, ReportItemViewModelBase item)
+        private void OnRequestRemoveItem(object sender, ImportFileReportItemViewModel item)
         {
             this.DeleteItem(item);
         }
 
-        public ObservableCollection<ReportItemViewModelBase> Items { get; }
+        public ObservableCollection<ImportFileReportItemViewModel> Items { get; }
 
         public ICommand DeleteCommand { get; }
         public ICommand ImportAllCommand { get; }
 
-        private void DeleteItem(ReportItemViewModelBase item)
+        private void DeleteItem(ImportFileReportItemViewModel item)
         {
             this.Items.Remove(item);
         }

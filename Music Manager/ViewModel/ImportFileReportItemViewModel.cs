@@ -7,7 +7,7 @@ using Koopakiller.Apps.MusicManager.Helper;
 
 namespace Koopakiller.Apps.MusicManager.ViewModel
 {
-    public class ImportFileReportItemViewModel : ReportItemViewModelBase
+    public class ImportFileReportItemViewModel : ReportItemViewModelBase<ImportFileReportItemViewModel>
     {
         public ImportFileReportItemViewModel(FileInfo fi)
         {

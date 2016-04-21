@@ -3,7 +3,7 @@ using GalaSoft.MvvmLight;
 
 namespace Koopakiller.Apps.MusicManager.ViewModel
 {
-    public abstract class ReportItemViewModelBase : ViewModelBase
+    public abstract class ReportItemViewModelBase<T> : ViewModelBase where T : ReportItemViewModelBase<T>
     {
         private string _errorMessage;
 
@@ -23,9 +23,9 @@ namespace Koopakiller.Apps.MusicManager.ViewModel
 
         public void RemoveItem()
         {
-            this.RequestRemoveItem?.Invoke(this, this);
+            this.RequestRemoveItem?.Invoke(this, (T)this);
         }
 
-        public event EventHandler<ReportItemViewModelBase> RequestRemoveItem;
+        public event EventHandler<T> RequestRemoveItem;
     }
 }
