@@ -1,11 +1,11 @@
 ﻿namespace Koopakiller.Apps.MusicManager.View
 {
     /// <summary>
-    /// Interaction logic for ReportView.xaml
+    /// Interaction logic for PlayerView.xaml
     /// </summary>
-    public partial class ReportView
+    public partial class PlayerView 
     {
-        public ReportView()
+        public PlayerView()
         {
             this.InitializeComponent();
         }

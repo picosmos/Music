@@ -9,6 +9,11 @@
              mc:Ignorable="d" d:DataContext="{d:DesignInstance viewModel:ImportViewModel}"
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
         <Button AllowDrop="True" Background="#F0F0F0" Content="Drop music files" FontSize="24" Command="{Binding OpenCommand}">
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="Drop">
@@ -19,5 +24,54 @@
                 </i:EventTrigger>
             </i:Interaction.Triggers>
         </Button>
+        <StackPanel Grid.Row="1" Orientation="Horizontal">
+            <Button Content="Import all" Command="{Binding ImportAllCommand}"/>
+        </StackPanel>
+        <ScrollViewer Grid.Row="2" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+            <ItemsControl ItemsSource="{Binding Items}" >
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.Resources>
+                    <Style TargetType="TextBlock" x:Key="ReportItemHeaderTextBlock">
+                        <Setter Property="FontWeight" Value="Light"/>
+                        <Setter Property="FontSize" Value="24"/>
+                    </Style>
+                    <DataTemplate DataType="{x:Type viewModel:ImportFileReportItemViewModel}">
+                        <StackPanel Margin="0 0 0 10">
+                            <TextBlock Style="{StaticResource ReportItemHeaderTextBlock}">Import File</TextBlock>
+                            <TextBlock>
+                            <Run Text="Source: " FontWeight="Bold"/><Run Text="{Binding Source, Mode=OneWay}"/>
+                            </TextBlock>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="Target: " FontWeight="Bold"/>
+                                <TextBox Text="{Binding Target, UpdateSourceTrigger=PropertyChanged}" Padding="0" BorderThickness="0"/>
+                            </StackPanel>
+
+                            <TextBlock Foreground="DarkRed" Visibility="{Binding HasError, Converter={StaticResource BooleanToVisibilityConverter}}">
+                            <Run Text="Error: "/>
+                            <Run Text="{Binding ErrorMessage, Mode=OneWay}"/>
+                            </TextBlock>
+
+                            <StackPanel Orientation="Horizontal">
+
+                                <StackPanel Orientation="Horizontal" Visibility="{Binding ImportShouldBePossible, Converter={StaticResource BooleanToVisibilityConverter}}">
+                                    <Button Content="Import (and override existing target file)" Command="{Binding ImportCommand}"
+                                    Visibility="{Binding TargetFileAlreadyExists, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+                                    <Button Content="Import" Command="{Binding ImportCommand}"
+                                    Visibility="{Binding TargetFileAlreadyExists, Converter={StaticResource BooleanToVisibilityConverter}, ConverterParameter=Something}"/>
+                                </StackPanel>
+
+                                <Button Content="Delete" Command="{Binding DataContext.DeleteCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}" CommandParameter="{Binding}"/>
+
+                            </StackPanel>
+
+                        </StackPanel>
+                    </DataTemplate>
+                </ItemsControl.Resources>
+            </ItemsControl>
+        </ScrollViewer>
     </Grid>
 </UserControl>
