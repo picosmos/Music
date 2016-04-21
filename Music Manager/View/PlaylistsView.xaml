@@ -13,10 +13,10 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <StackPanel Orientation="Horizontal">
+        <WrapPanel Style="{StaticResource MenuButtonPanel}" >
             <Button Content="Add Playlist" Command="{Binding AddPlaylistCommand}"/>
             <Button Content="Add Playlist for all music files" Command="{Binding AddAllSongsPlaylistCommand}"/>
-        </StackPanel>
+        </WrapPanel>
         <ItemsControl Grid.Row="1" ItemsSource="{Binding Playlists}">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
@@ -25,22 +25,22 @@
             </ItemsControl.ItemsPanel>
             <ItemsControl.Resources>
                 <DataTemplate DataType="{x:Type viewModel:AllSongsPlaylistViewModel}">
-                    <Grid>
+                    <Grid Margin="0 2 0 2">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
                         <TextBox Text="{Binding Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                         <StackPanel Grid.Column="1" HorizontalAlignment="Right" Orientation="Horizontal">
-                            <Button Content="Update" Command="{Binding UpdateSongsCommand}" />
-                            <Button Content="Open Folder" Command="{Binding OpenFolderCommand}" />
-                            <Button Content="Open" Command="{Binding OpenCommand}" />
-                            <Button Content="Delete" Command="{Binding DeleteCommand}" />
+                            <Button Style="{StaticResource GlyphButton}" Content="&#xE117;" ToolTip="Update songs in this playlist" Command="{Binding UpdateSongsCommand}" />
+                            <Button Style="{StaticResource GlyphButton}" Content="&#xEC50;" ToolTip="Open Folder" Command="{Binding OpenFolderCommand}" />
+                            <Button Style="{StaticResource GlyphButton}" Content="&#xE160;" ToolTip="Open" Command="{Binding OpenCommand}" />
+                            <Button Style="{StaticResource GlyphButton}" Content="&#xE107;" ToolTip="Delete" Command="{Binding DeleteCommand}" />
                         </StackPanel>
                     </Grid>
                 </DataTemplate>
                 <DataTemplate DataType="{x:Type viewModel:PlaylistItemViewModel}">
-                    <Grid>
+                    <Grid Margin="0 2 0 2">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="Auto"/>
@@ -51,12 +51,14 @@
                         </Grid.RowDefinitions>
                         <TextBox Text="{Binding Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                         <StackPanel Grid.Row="0" Grid.Column="01" HorizontalAlignment="Right" Orientation="Horizontal">
-                            <Button Content="Save" Command="{Binding SaveCommand}"/>
-                            <Button Content="Open Folder" Command="{Binding OpenFolderCommand}" />
-                            <Button Content="Open" Command="{Binding OpenCommand}" />
-                            <Button Content="Delete" Command="{Binding DeleteCommand}" />
+                            <Button Style="{StaticResource GlyphButton}" Content="&#xE105;" ToolTip="Save" Command="{Binding SaveCommand}"/>
+                            <Button Style="{StaticResource GlyphButton}" Content="&#xEC50;" ToolTip="Open Folder" Command="{Binding OpenFolderCommand}" />
+                            <Button Style="{StaticResource GlyphButton}" Content="&#xE160;" ToolTip="Open" Command="{Binding OpenCommand}" />
+                            <Button Style="{StaticResource GlyphButton}" Content="&#xE107;" ToolTip="Delete" Command="{Binding DeleteCommand}" />
+                            <ToggleButton Style="{StaticResource GlyphToggleButton}" Content="&#xE189;" ToolTip="Show music files" Name="ShowMusicFiles"/>
                         </StackPanel>
-                        <Expander Grid.ColumnSpan="2" Grid.Row="1" Grid.Column="0" Header="Songs">
+                        <Border Grid.ColumnSpan="2" Grid.Row="1" Grid.Column="0" 
+                                Visibility="{Binding IsChecked, ElementName=ShowMusicFiles, Converter={StaticResource BooleanToVisibilityConverter}}">
                             <Grid Background="White" AllowDrop="True">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="Auto"/>
@@ -71,10 +73,10 @@
                                     </i:EventTrigger>
                                 </i:Interaction.Triggers>
                                 <StackPanel Orientation="Horizontal">
-                                    <Button Content="Click or drop music files to add" Command="{Binding AddMusicFileCommand}"/>
+                                    <Button Style="{StaticResource DropButtonStyle}" Content="Click or drop music files to add" Command="{Binding AddMusicFileCommand}"/>
                                 </StackPanel>
-                                <ItemsControl Grid.Row="1" ItemsSource="{Binding SongFiles}">
-                                    <ItemsControl.ItemsPanel>
+                                <ListBox Grid.Row="1" ItemsSource="{Binding SongFiles}">
+                                    <!--<ItemsControl.ItemsPanel>
                                         <ItemsPanelTemplate>
                                             <VirtualizingStackPanel/>
                                         </ItemsPanelTemplate>
@@ -89,10 +91,10 @@
                                                 <TextBlock Text="{Binding }"/>
                                             </Grid>
                                         </DataTemplate>
-                                    </ItemsControl.ItemTemplate>
-                                </ItemsControl>
+                                    </ItemsControl.ItemTemplate>-->
+                                </ListBox>
                             </Grid>
-                        </Expander>
+                        </Border>
                     </Grid>
                 </DataTemplate>
             </ItemsControl.Resources>
