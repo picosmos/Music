@@ -21,7 +21,7 @@ namespace Koopakiller.Apps.MusicManager.ViewModel
             this.DropCommand = new RelayCommand<DragEventArgs>(this.OnDrop);
 
             this.Items = new ObservableCollection<ReportItemViewModelBase>();
-            this.ImportAllCommand = new GalaSoft.MvvmLight.Command.RelayCommand(this.OnImportAll, () => this.Items.OfType<ImportFileReportItemViewModel>().Any(x => x.ImportShouldBePossible));
+            this.ImportAllCommand = new RelayCommand(this.OnImportAll, () => this.Items.OfType<ImportFileReportItemViewModel>().Any(x => x.ImportShouldBePossible));
             this.Items.CollectionChanged += this.OnItemsChanged;
 
             this.DeleteCommand = new RelayCommand<ReportItemViewModelBase>(this.DeleteItem);

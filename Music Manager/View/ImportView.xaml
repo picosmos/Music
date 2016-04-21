@@ -14,7 +14,7 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <Button AllowDrop="True" Background="#F0F0F0" Content="Drop music files" FontSize="24" Command="{Binding OpenCommand}">
+        <Button AllowDrop="True" Content="Drop music files or click" Style="{StaticResource DropButtonStyle}" FontSize="24" Command="{Binding OpenCommand}">
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="Drop">
                     <command:EventToCommand  Command="{Binding DropCommand}" PassEventArgsToCommand="True"/>
@@ -24,9 +24,11 @@
                 </i:EventTrigger>
             </i:Interaction.Triggers>
         </Button>
-        <StackPanel Grid.Row="1" Orientation="Horizontal">
-            <Button Content="Import all" Command="{Binding ImportAllCommand}"/>
-        </StackPanel>
+        
+        <Menu Grid.Row="1">
+            <MenuItem Header="Import all" Command="{Binding ImportAllCommand}"></MenuItem>
+        </Menu>
+        
         <ScrollViewer Grid.Row="2" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
             <ItemsControl ItemsSource="{Binding Items}" >
                 <ItemsControl.ItemsPanel>
