@@ -10,8 +10,8 @@ namespace Koopakiller.Apps.MusicManager.ViewModel
 
         public SettingsViewModel() : base("Settings")
         {
-            this.SaveCommand = new RelayCommand(this.OnSave, () => this.IsSaved);
-            this.ResetCommand = new RelayCommand(this.OnReset, () => this.IsSaved);
+            this.SaveCommand = new RelayCommand(this.OnSave, () => !this.IsSaved);
+            this.ResetCommand = new RelayCommand(this.OnReset, () => !this.IsSaved);
 
             this.OnReset();
         }
