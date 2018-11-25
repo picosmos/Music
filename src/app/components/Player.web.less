@@ -1,0 +1,23 @@
+@import '../styles/common.less';
+.container {
+    border-top: 1px @color-accent-bg solid;
+    background-color: @color-accent-fg;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+
+    .left {
+        display: inline-block;
+        grid-column: 1;
+        justify-self: start;
+    }
+    .center {
+        display: inline-block;
+        grid-column: 2;
+        justify-self: center;
+    }
+    .right {
+        display: inline-block;
+        grid-column: 3;
+        justify-self: end;
+    }
+}
