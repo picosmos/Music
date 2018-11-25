@@ -1,0 +1,3 @@
+<ol id="list" (drop)="onDrop($event)" (dragover)="onDragOver($event)" [ngClass]="{'is-dragging': isDragging}">
+    <li *ngFor="let item of items">{{item.path}}</li>
+</ol>
