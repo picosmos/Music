@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { PlayerComponent } from './components/Player';
 import { MusicListComponent } from './components/MusicList';
+import { PlayerService } from './services/PlayerService';
 
 
 @NgModule({
@@ -16,6 +17,7 @@ import { MusicListComponent } from './components/MusicList';
     BrowserModule
   ],
   providers: [
+    PlayerService
   ],
   bootstrap: [AppComponent]
 })

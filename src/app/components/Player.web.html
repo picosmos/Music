@@ -3,9 +3,10 @@
         LEFT
     </div>
     <div class="center">
-        CENTER
+        <span *ngIf="hasFile">{{marquee}}</span>
     </div>
     <div class="right">
-        RIGHT
+        <a *ngIf="hasFile" (click)="onPlay()">Play</a>
+        <a *ngIf="hasFile" (click)="onPause()">Pause</a>
     </div>
 </div>

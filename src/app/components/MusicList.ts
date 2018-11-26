@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from "@angular/core";
+import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
 import { MusicViewModel } from "../models/MusicViewModel";
 
 @Component({
@@ -13,6 +13,13 @@ export class MusicListComponent {
 
   @Input()
   public items: MusicViewModel[] = [];
+
+  @Output()
+  itemClicked: EventEmitter<MusicViewModel> = new EventEmitter();
+
+  public onItemClick(item: MusicViewModel) {
+    this.itemClicked.emit(item);
+  }
 
   public isDragging: boolean = false;
 
