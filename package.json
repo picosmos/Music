@@ -10,7 +10,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "electron": "ng build --base-href ./ && electron --enable-transparent-visuals --disable-gpu ."
+    "electron": "ng build --base-href ./ && electron ."
   },
   "private": true,
   "dependencies": {
