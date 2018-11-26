@@ -1,0 +1,12 @@
+<div>
+
+    <input #newPath type="text" (keyup.enter)="addPath(newPath.value);newPath.value='';" />
+    <button (click)="addPath(newPath.value);newPath.value='';">Add</button>
+
+    <ul>
+        <li *ngFor="let path of paths">
+            {{path}}
+        </li>
+    </ul>
+
+</div>

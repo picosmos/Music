@@ -10,4 +10,10 @@ export class LibraryComponent {
   constructor(
   ) {
   }
+
+  public paths: string[] = [];
+
+  public addPath(path: string) {
+    this.paths.push(path);
+  }
 }
