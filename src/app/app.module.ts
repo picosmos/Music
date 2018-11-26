@@ -7,6 +7,7 @@ import { MusicListComponent } from './components/MusicList';
 import { PlayerService } from './services/PlayerService';
 import { LibraryService } from './services/LibraryService';
 import { LibraryComponent } from './components/Library';
+import { IndexingService } from './services/IndexingService';
 
 
 @NgModule({
@@ -21,7 +22,8 @@ import { LibraryComponent } from './components/Library';
   ],
   providers: [
     PlayerService,
-    LibraryService
+    LibraryService,
+    IndexingService
   ],
   bootstrap: [AppComponent]
 })

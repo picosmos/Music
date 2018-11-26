@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
 import { MusicViewModel } from "../models/MusicViewModel";
 import { LibraryService } from "../services/LibraryService";
+import { IndexingService } from "../services/IndexingService";
 
 @Component({
   selector: "library",
@@ -9,7 +10,8 @@ import { LibraryService } from "../services/LibraryService";
 })
 export class LibraryComponent implements OnInit {
   constructor(
-    private _libraryService: LibraryService
+    private _libraryService: LibraryService,
+    private _indexingService: IndexingService
   ) {
   }
 
@@ -20,13 +22,19 @@ export class LibraryComponent implements OnInit {
       return;
     }
 
-    this._libraryService.addPath(path);
     this.paths.push(path);
+    this._libraryService.addPath(path).then(() => { });
   }
 
   public deletePath(path: string) {
     this.paths.splice(this.paths.indexOf(path), 1);
     this._libraryService.deletePath(path).then(() => { });
+  }
+
+  public findMusicFiles() {
+    this._indexingService.findFiles().then(files => {
+      console.log(files);
+    });
   }
 
   public async ngOnInit() {
