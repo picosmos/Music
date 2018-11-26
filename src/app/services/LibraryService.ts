@@ -13,6 +13,14 @@ export class LibraryService {
         this._db.insert(new PathModel(path));
     }
 
+    public async deletePath(path: string): Promise<number> {
+        return new Promise<number>(resolve => {
+            this._db.remove(new PathModel(path), (err, n) => {
+                resolve(n);
+            });
+        });
+    }
+
     public async getPaths(): Promise<string[]> {
         return new Promise<string[]>(resolve => {
             this._db.find({ type: "path" }, (err, docs: PathModel[]) => {

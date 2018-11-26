@@ -5,7 +5,7 @@
 
     <ul>
         <li *ngFor="let path of paths">
-            {{path}}
+            <button (click)="deletePath(path)">Delete</button> {{path}}
         </li>
     </ul>
 
