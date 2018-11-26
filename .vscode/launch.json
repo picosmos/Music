@@ -1,0 +1,15 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Electron Main",
+            "cwd": "${workspaceRoot}",
+            "runtimeExecutable": "${workspaceFolder}/node_modules/.bin/electron",
+            "runtimeArgs": [],
+            "program": "${workspaceFolder}/main.js",
+            "protocol": "inspector"
+        }
+    ]
+}
