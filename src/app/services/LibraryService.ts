@@ -45,6 +45,24 @@ export class LibraryService {
         });
     }
 
+    public async deleteAllMusic(): Promise<number> {
+        return new Promise<number>((resolve, reject) => {
+            try {
+                this._db.remove({ type: "music" }, { multi: true }, (err, n) => {
+                    if (err) {
+                        reject(err);
+                    }
+                    else {
+                        resolve(n);
+                    }
+                });
+            }
+            catch (ex) {
+                reject(ex);
+            }
+        });
+    }
+
     public async getPaths(): Promise<string[]> {
         return new Promise<string[]>((resolve, reject) => {
             try {
@@ -65,6 +83,42 @@ export class LibraryService {
             }
         });
     }
+
+
+    public async getMusic(): Promise<MusicMetaDataModel[]> {
+        return new Promise<MusicMetaDataModel[]>((resolve, reject) => {
+            try {
+                this._db.find({ type: "music" }, (err, docs: MusicMetaDataModel[]) => {
+                    if (err) {
+                        reject(err);
+                        return;
+                    }
+                    resolve(docs);
+                });
+            }
+            catch (ex) {
+                reject(ex);
+            }
+        });
+    }
+
+    public addMusic(data: MusicMetaDataModel): Promise<void> {
+        return new Promise((resolve, reject) => {
+            try {
+                this._db.insert(data, (err, document) => {
+                    if (err) {
+                        reject(err);
+                    }
+                    else {
+                        resolve();
+                    }
+                });
+            }
+            catch (ex) {
+                reject(ex);
+            }
+        });
+    }
 }
 
 export interface IModel {
@@ -78,4 +132,21 @@ export class PathModel implements IModel {
         public path: string
     ) {
     }
+}
+
+export class MusicMetaDataModel implements IModel {
+    public type = "music";
+
+    public artists: string[];
+    public album: string;
+    public albumArtists: string[];
+    public title: string;
+    public year: string;
+    public track: { no: number, of: number } | null;
+    public disk: { no: number, of: number } | null;
+    public genres: string[];
+    public picture: any;
+    public duration: number;
+
+    public file: string;
 }

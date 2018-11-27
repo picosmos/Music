@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
 import { MusicViewModel } from "../models/MusicViewModel";
-import { LibraryService } from "../services/LibraryService";
+import { LibraryService, MusicMetaDataModel } from "../services/LibraryService";
 import { IndexingService } from "../services/IndexingService";
 
 @Component({
@@ -17,6 +17,8 @@ export class LibraryComponent implements OnInit {
 
   public paths: string[] = [];
 
+  public music: MusicMetaDataModel[];
+
   public addPath(path: string) {
     if (!path || this.paths.indexOf(path) >= 0) {
       return;
@@ -32,8 +34,13 @@ export class LibraryComponent implements OnInit {
   }
 
   public findMusicFiles() {
-    this._indexingService.findFiles().then(files => {
-      console.log(files);
+    console.log("findMusic");
+    this._indexingService.reCreateIndex().then(() => {
+      console.log("reCreateIndex End");
+      this._libraryService.getMusic().then((data) => {
+        console.log("got Data");
+        this.music = data;
+      });
     });
   }
 

@@ -11,4 +11,15 @@
 
     <button (click)="findMusicFiles()">Find Music Files</button>
 
+    <table>
+        <tr>
+            <th>Artist</th>
+            <th>Title</th>
+        </tr>
+        <tr *ngFor="let item of music">
+            <td><span *ngFor="let artist of item.artists">{{artist}}</span></td>
+            <td>{{item.title}}</td>
+        </tr>
+    </table>
+
 </div>
