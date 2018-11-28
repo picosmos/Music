@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
-import { MusicViewModel } from "../models/MusicViewModel";
-import { LibraryService, MusicMetaDataModel } from "../services/LibraryService";
+import { LibraryService } from "../services/LibraryService";
 import { IndexingService } from "../services/IndexingService";
+import { MusicMetaDataModel } from "../models/Database";
 
 @Component({
   selector: "library",

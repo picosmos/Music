@@ -1,6 +1,7 @@
 import { Injectable } from "@angular/core";
-import { LibraryService, MusicMetaDataModel } from "./LibraryService";
+import { LibraryService } from "./LibraryService";
 import * as mm from "musicmetadata";
+import { MusicMetaDataModel } from "../models/Database";
 
 let fs/*: typeof Fs*/ = window['require']('fs');
 let path = window['require']('path');
@@ -18,7 +19,7 @@ export class IndexingService {
         if (!progressCallback) {
             progressCallback = (x, y) => { };
         }
-        
+
         progressCallback(0, 1);
 
         let files = await this.findFiles();
