@@ -14,20 +14,32 @@ export class IndexingService {
     ) {
     }
 
-    public async reCreateIndex() {
+    public async reCreateIndex(progressCallback?: ((current: number, max: number) => void)) {
+        if (!progressCallback) {
+            progressCallback = (x, y) => { };
+        }
+        
+        progressCallback(0, 1);
+
         let files = await this.findFiles();
         await this._libraryService.deleteAllMusic();
-        for (let file of files) {
-            console.log({file});
+
+        progressCallback(1, files.length + 1);
+
+        for (let i = 0; i < files.length; ++i) {
+            progressCallback(i + 1, files.length + 1);
+
             try {
-                let data = await this.getMetaData(file);
-                let newData = this.convertMetaDataToModel(data, file);
+                let data = await this.getMetaData(files[i]);
+                let newData = this.convertMetaDataToModel(data, files[i]);
                 await this._libraryService.addMusic(newData);
             }
             catch (ex) {
-                console.log({ "file": file, ex: ex });
+                console.log({ "file": files[i], ex: ex });
             }
         }
+
+        progressCallback(files.length + 1, files.length + 1);
     }
 
     public convertMetaDataToModel(data: MM.Metadata, file: string) {

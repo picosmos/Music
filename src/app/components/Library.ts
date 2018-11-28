@@ -19,6 +19,9 @@ export class LibraryComponent implements OnInit {
 
   public music: MusicMetaDataModel[];
 
+  public progressCurrent: number;
+  public progressMax: number;
+
   public addPath(path: string) {
     if (!path || this.paths.indexOf(path) >= 0) {
       return;
@@ -34,11 +37,17 @@ export class LibraryComponent implements OnInit {
   }
 
   public findMusicFiles() {
-    console.log("findMusic");
-    this._indexingService.reCreateIndex().then(() => {
-      console.log("reCreateIndex End");
+    this.progressCurrent = 0;
+    this.progressMax = 1;
+    this._indexingService.reCreateIndex((current, max) => {
+      this.progressCurrent = current;
+      this.progressMax = max;
+      if (current == max) {
+        this.progressCurrent = null;
+        this.progressMax = null;
+      }
+    }).then(() => {
       this._libraryService.getMusic().then((data) => {
-        console.log("got Data");
         this.music = data;
       });
     });

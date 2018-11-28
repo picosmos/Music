@@ -11,6 +11,10 @@
 
     <button (click)="findMusicFiles()">Find Music Files</button>
 
+    <div *ngIf="progressCurrent && progressMax">
+        <progress value="{{progressCurrent}}" max="{{progressMax}}"></progress>
+        <span>Processed {{progressCurrent}} of {{progressMax}}</span>
+    </div>
     <table>
         <tr>
             <th>Artist</th>
