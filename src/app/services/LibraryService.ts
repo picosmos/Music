@@ -6,12 +6,17 @@ import { MusicMetaDataModel, PathModel } from "../models/Database";
 export class LibraryService {
     constructor() {
         this._db = new Datastore({ filename: 'datafile.nedb', autoload: true });
+        this._db.ensureIndex({ fieldName: 'type' }, function (err) {
+            console.error("Error while creating NeDB index: 'type'", err);
+        });
     }
 
     private _db: Datastore;
 
-    public addPath(path: string): Promise<void> {
-        return new Promise((resolve, reject) => {
+    // Paths
+
+    public async addPath(path: string): Promise<void> {
+        return new Promise<void>((resolve, reject) => {
             try {
                 this._db.insert(new PathModel(path), (err, document) => {
                     if (err) {
@@ -32,24 +37,6 @@ export class LibraryService {
         return new Promise<number>((resolve, reject) => {
             try {
                 this._db.remove(new PathModel(path), (err, n) => {
-                    if (err) {
-                        reject(err);
-                    }
-                    else {
-                        resolve(n);
-                    }
-                });
-            }
-            catch (ex) {
-                reject(ex);
-            }
-        });
-    }
-
-    public async deleteAllMusic(): Promise<number> {
-        return new Promise<number>((resolve, reject) => {
-            try {
-                this._db.remove({ type: "music" }, { multi: true }, (err, n) => {
                     if (err) {
                         reject(err);
                     }
@@ -85,6 +72,43 @@ export class LibraryService {
         });
     }
 
+    //Music
+
+    public async addMusic(data: MusicMetaDataModel): Promise<void> {
+        return new Promise<void>((resolve, reject) => {
+            try {
+                this._db.insert(data, (err, document) => {
+                    if (err) {
+                        reject(err);
+                    }
+                    else {
+                        resolve();
+                    }
+                });
+            }
+            catch (ex) {
+                reject(ex);
+            }
+        });
+    }
+
+    public async deleteAllMusic(): Promise<number> {
+        return new Promise<number>((resolve, reject) => {
+            try {
+                this._db.remove({ type: "music" }, { multi: true }, (err, n) => {
+                    if (err) {
+                        reject(err);
+                    }
+                    else {
+                        resolve(n);
+                    }
+                });
+            }
+            catch (ex) {
+                reject(ex);
+            }
+        });
+    }
 
     public async getMusic(): Promise<MusicMetaDataModel[]> {
         return new Promise<MusicMetaDataModel[]>((resolve, reject) => {
@@ -95,24 +119,6 @@ export class LibraryService {
                         return;
                     }
                     resolve(docs);
-                });
-            }
-            catch (ex) {
-                reject(ex);
-            }
-        });
-    }
-
-    public addMusic(data: MusicMetaDataModel): Promise<void> {
-        return new Promise((resolve, reject) => {
-            try {
-                this._db.insert(data, (err, document) => {
-                    if (err) {
-                        reject(err);
-                    }
-                    else {
-                        resolve();
-                    }
                 });
             }
             catch (ex) {
